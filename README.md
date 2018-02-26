@@ -86,3 +86,7 @@
 ```
 ## 演示一下：
 <div align=center><img width="290" height="505" src="https://github.com/wanghao15536870732/MaterialTest/blob/master/app/src/main/res/drawable/show_1.gif"/></div>
+
+## 对了，还有如[何充分利用手机状态栏空间](http://blog.csdn.net/qq_41005535/article/details/79376481)就像这张图片一样：
+
+<div align=center><img width="290" height="505" src="https://github.com/wanghao15536870732/UIBestPractice/blob/bcd2b99740b0f9a3bbe69e5b96ea5aa592a0dc68/app/src/main/res/drawable/apple.png"/></div>
