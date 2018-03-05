@@ -1,4 +1,4 @@
-package com.example.lab.android.nuc.materialtest;
+package com.example.lab.android.nuc.materialtest.Activity;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.lab.android.nuc.materialtest.R;
 
 public class FruitActivity extends AppCompatActivity {
 

@@ -1,11 +1,11 @@
-package com.example.lab.android.nuc.materialtest;
+package com.example.lab.android.nuc.materialtest.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,11 +15,15 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.lab.android.nuc.materialtest.DragFloatActionButton;
+import com.example.lab.android.nuc.materialtest.Fruit;
+import com.example.lab.android.nuc.materialtest.FruitAdapter;
+import com.example.lab.android.nuc.materialtest.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
 
-    private Fruit[] fruits = {new Fruit("Apple",R.drawable.apple_pic),new Fruit("Banana",R.drawable.banana_pic),
+
+    private Fruit[] fruits = {new Fruit("Apple", R.drawable.apple_pic),new Fruit("Banana",R.drawable.banana_pic),
             new Fruit("Orange",R.drawable.orange_pic),new Fruit("Watermelon",R.drawable.watermelon_pic),
             new Fruit("Pear",R.drawable.pear_pic),new Fruit("Grape",R.drawable.grape_pic),
             new Fruit("Pineapple",R.drawable.pineapple_pic),new Fruit("Strawberry",R.drawable.strawberry_pic),
@@ -59,12 +64,30 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
-        navView.setCheckedItem(R.id.nav_call);
+        navView.setCheckedItem(R.id.main_fruit);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                我们可以在这个方法中写自己的逻辑，这里我们只是调用DrawerLayout的closeDrawers()方法将滑动菜单关闭就好
-                mDrawerLayout.closeDrawers();
+                switch (item.getItemId()){
+                    case R.id.main_fruit:
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case R.id.nav_call:
+
+                        break;
+                    case R.id.nav_friends:
+
+                        break;
+                    case R.id.nav_location:
+
+                        Intent location_intent = new Intent(MainActivity.this,LocationActivity.class);
+                        startActivity(location_intent);
+                        break;
+                    case R.id.nav_task:
+                        break;
+                    default:
+                }
                 return true;
             }
         });

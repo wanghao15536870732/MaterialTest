@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.lab.android.nuc.materialtest.Activity.FruitActivity;
 
 import java.util.List;
 
