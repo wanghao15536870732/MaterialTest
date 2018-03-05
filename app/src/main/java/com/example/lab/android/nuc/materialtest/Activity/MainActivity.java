@@ -1,11 +1,17 @@
 package com.example.lab.android.nuc.materialtest.Activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lab.android.nuc.materialtest.DragFloatActionButton;
@@ -35,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
 
+    //切换头像
+    private ImageView headImageView;
 
+    //打开相册
+    public static final int CHOOSE_PHOTO = 2;
+
+
+    //封装列表中所有的水果
     private Fruit[] fruits = {new Fruit("Apple", R.drawable.apple_pic),new Fruit("Banana",R.drawable.banana_pic),
             new Fruit("Orange",R.drawable.orange_pic),new Fruit("Watermelon",R.drawable.watermelon_pic),
             new Fruit("Pear",R.drawable.pear_pic),new Fruit("Grape",R.drawable.grape_pic),
@@ -47,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FruitAdapter fruitAdapter;
 
 
+    //下拉刷新列表
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("ResourceAsColor")
@@ -56,6 +71,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        headImageView = (ImageView) findViewById(R.id.icon_image);
+
+        //点击头像调用相册选图片进行显示
+        headImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },1);
+                }
+                else{
+
+                }
+            }
+        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
@@ -80,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.nav_location:
-
                         Intent location_intent = new Intent(MainActivity.this,LocationActivity.class);
                         startActivity(location_intent);
                         break;
@@ -135,6 +167,47 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    //通过储存的授权打开相册
+    private void openAlbum(){
+        //使用Intent调用储存权限
+        Intent intent = new Intent("android.intent.action.GET_CONTEXT");
+        intent.setType("image/*");
+        startActivityForResult(intent,CHOOSE_PHOTO);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    openAlbum();
+                }else {
+                    Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case CHOOSE_PHOTO:
+                if (requestCode == RESULT_OK){
+                    //判断手机版本号
+                    if (Build.VERSION.SDK_INT >= 19){
+                        //4.4版本以上的使用下面的方法进行处理
+
+                    }else {
+                        //4.4版本以下的使用下面的方法进行处理
+
+                    }
+                }
+        }
+    }
+
+    //更新水果的布局
     private void refreshFruit(){
         new Thread(new Runnable() {
             @Override
@@ -159,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    //重复显示水果的名字50遍
     private void initFruits(){
         fruitList.clear();
         for (int i = 0; i < 50; i++) {

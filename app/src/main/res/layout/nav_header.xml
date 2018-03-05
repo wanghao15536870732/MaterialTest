@@ -6,6 +6,7 @@
     android:padding="10dp"
     android:background="?attr/colorPrimary">
 
+    <!--该开源项目是用来轻松实现图片圆形化的共能-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
         android:layout_width="70dp"
