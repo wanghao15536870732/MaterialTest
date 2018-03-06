@@ -1,4 +1,4 @@
-package com.example.lab.android.nuc.materialtest;
+package com.example.lab.android.nuc.materialtest.Fruit;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lab.android.nuc.materialtest.Activity.FruitActivity;
+import com.example.lab.android.nuc.materialtest.R;
 
 import java.util.List;
 

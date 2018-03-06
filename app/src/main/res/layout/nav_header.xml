@@ -13,6 +13,19 @@
         android:layout_height="70dp"
         android:src="@drawable/img_x"
         android:layout_centerInParent="true"/>
+    <ImageView
+        android:id="@+id/ic_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@+id/icon_image"
+        android:src="@drawable/ic_edit_black_24dp" />
+    <Button
+        android:id="@+id/change_headPhoto"
+        android:layout_width="95dp"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@+id/ic_edit"
+        android:text="点击切换头像"
+        android:textSize="10sp"/>
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
@@ -27,8 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/username"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:text="1484290617@qq.com"
         android:textColor="#FFF"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
 </RelativeLayout>

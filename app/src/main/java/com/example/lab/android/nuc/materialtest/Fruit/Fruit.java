@@ -1,4 +1,4 @@
-package com.example.lab.android.nuc.materialtest;
+package com.example.lab.android.nuc.materialtest.Fruit;
 
 public class Fruit {
     private String name;

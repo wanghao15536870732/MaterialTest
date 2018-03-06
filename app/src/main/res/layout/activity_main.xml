@@ -33,7 +33,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_done"
             android:elevation="8dp"/>
-        <com.example.lab.android.nuc.materialtest.DragFloatActionButton
+        <com.example.lab.android.nuc.materialtest.FloatActionButton.DragFloatActionButton
             android:id="@+id/fab_move"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
