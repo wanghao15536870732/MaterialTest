@@ -32,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lab.android.nuc.materialtest.FloatActionButton.DragFloatActionButton;
@@ -39,17 +40,23 @@ import com.example.lab.android.nuc.materialtest.Fruit.Fruit;
 import com.example.lab.android.nuc.materialtest.Fruit.FruitAdapter;
 import com.example.lab.android.nuc.materialtest.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private DrawerLayout mDrawerLayout;
 
+
+    //切换名字和邮箱
+    private TextView usernameView;
+    private TextView emailView;
 
     //切换头像
     private CircleImageView headImageView;
@@ -83,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
         headImageView = (CircleImageView) findViewById(R.id.icon_image);
 
+        usernameView = (TextView) findViewById(R.id.username);
+        emailView = (TextView) findViewById(R.id.mail);
+
         Button change_view = (Button) findViewById(R.id.change_headPhoto);
         //点击切换头像按钮调用相册选图片进行显示
 //        change_view.setOnClickListener(new View.OnClickListener() {
@@ -102,12 +112,20 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
+
+            //调用actionBar的setDisplayHomeAsUpEnabled()方法让导航按钮显示出开
             actionBar.setDisplayHomeAsUpEnabled(true);
+
+            //再设置一个导航按钮图标,默认是返回键,设置为菜单的样式
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         }
         navView.setCheckedItem(R.id.main_fruit);
+
+        //设置菜单栏item的点击事件
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -130,14 +148,18 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(location_intent);
                         break;
                     case R.id.nav_task:
-                        Intent task_intent = new Intent(MainActivity.this,TaskActivity.class);
-                        startActivity(task_intent);
+                        Intent taskIntent = new Intent(MainActivity.this,TaskActivity.class);
+                        startActivity(taskIntent);
                         break;
                     default:
                 }
                 return true;
             }
         });
+
+        //登陆按钮的点击事件
+        usernameView.setOnClickListener(this);
+        emailView.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -345,5 +367,17 @@ public class MainActivity extends AppCompatActivity {
             default:
         }
         return true;
+    }
+
+    //点击事件的
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.username :case R.id.mail:
+                Intent login_intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(login_intent);
+                break;
+            default:
+        }
     }
 }

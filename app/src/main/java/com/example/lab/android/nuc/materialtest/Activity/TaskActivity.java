@@ -110,11 +110,7 @@ public class TaskActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
-
     //在没有开始发送消息前定义三个初始消息
     private void initMags(){
         Msg msg1 = new Msg("你好！",Msg.TYPE_RECEIVED);

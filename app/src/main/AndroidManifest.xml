@@ -41,7 +41,8 @@
         <activity android:name=".Activity.TaskActivity" />
         <activity android:name=".Activity.Main1Activity" />
         <activity android:name=".Activity.FriendActivity" />
-        <activity android:name=".Activity.CallActivity"></activity>
+        <activity android:name=".Activity.CallActivity" />
+        <activity android:name=".Activity.LoginActivity"></activity>
     </application>
 
 </manifest>
