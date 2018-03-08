@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 填充的颜色 -->
+    <solid android:color="#75c233" />
+
+    <!--设置渐变-->
+    <gradient android:startColor="#75c233"
+        android:endColor="#b0df87"
+        android:angle="180"/>
+    <!--angle控制渐变的方向-->
+    <!-- 设置按钮的四个角为弧形 -->
+
+
+
+    <!-- padding：Button里面的文字与Button边界的间隔 -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp"
+        />
+</shape>

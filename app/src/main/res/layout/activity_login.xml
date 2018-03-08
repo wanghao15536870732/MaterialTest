@@ -4,7 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    
+    <include layout="@layout/login_title"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/shape_1">
+        <!--该开源项目是用来轻松实现图片圆形化的共能-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="88dp"
+            android:src="@drawable/img_x" />
+
+        <ImageView
+            android:id="@+id/edit_view"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/take_picture"
+            android:layout_toStartOf="@+id/take_picture"
+            android:src="@drawable/ic_stay_primary_portrait_black_24dp" />
+
+        <Button
+            android:id="@+id/take_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:text="点击拍照切换头像"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/take_form_album"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/take_picture"
+            android:layout_marginTop="12dp"
+            android:layout_toLeftOf="@+id/take_picture"
+            android:layout_toStartOf="@+id/take_picture"
+            android:src="@drawable/ic_picture"/>
+
+        <Button
+            android:id="@+id/take_album"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/take_form_album"
+            android:layout_below="@+id/take_picture"
+            android:text="相册选择头像"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fff">
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -43,16 +114,42 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"/>
+        <ImageView
+            android:id="@+id/mail_Visibility"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_visibility" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/remember_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Remember password"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+    </LinearLayout>
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/shape"
         android:text="Login"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textAllCaps="false"
         android:textColor="#0f0e0e"
-        android:textAllCaps="false" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>
