@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lab.android.nuc.materialtest">
 
-    <!--读取联系人的权限-->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 读取联系人的权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 基于位置服务的所有权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -43,18 +43,23 @@
         <activity android:name=".Activity.TaskActivity" />
         <activity android:name=".Activity.FriendActivity" />
         <activity android:name=".Activity.CallActivity" />
-        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.LoginActivity" />
 
-        <!--要对相机的内容提供器进行注册-->
+        <!-- 要对相机的内容提供器进行注册 -->
         <provider
-            android:authorities="com.example.lab.android.nuc.materialtest"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.lab.android.nuc.materialtest"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <service
+            android:name=".Service.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

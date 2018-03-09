@@ -6,8 +6,10 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,6 +18,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -46,6 +49,7 @@ import com.example.lab.android.nuc.materialtest.FloatActionButton.DragFloatActio
 import com.example.lab.android.nuc.materialtest.Fruit.Fruit;
 import com.example.lab.android.nuc.materialtest.Fruit.FruitAdapter;
 import com.example.lab.android.nuc.materialtest.R;
+import com.example.lab.android.nuc.materialtest.Service.DownloadService;
 
 import org.w3c.dom.Text;
 
@@ -58,6 +62,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
+    //下载的服务
+    private DownloadService.DownloadBinder downloadBinder;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            //向下转型
+            downloadBinder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
     private DrawerLayout mDrawerLayout;
 
     private static int VIBRAT = 1;
@@ -100,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         usernameView = (TextView) findViewById(R.id.username);
         emailView = (TextView) findViewById(R.id.mail);
+
+        //开启服务
+        Intent intent_4 = new Intent(this,DownloadService.class);
+        startService(intent_4);
+        bindService(intent_4,connection,BIND_AUTO_CREATE);
 
         //打开应用显示通知栏
         notification();
@@ -275,15 +299,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()){
             case R.id.backup:
-                Toast.makeText(this,"You clicked Backup",Toast.LENGTH_SHORT).show();
+                String url = "http://shouji.360tpcdn.com/180205/be9c722e58ec42eb85ceef6325ee8619/com.kugou.android_8948.apk";
+                downloadBinder.startDownload(url);
                 break;
             case R.id.delete:
-                Toast.makeText(this,"You clicked Delete",Toast.LENGTH_SHORT).show();
+                downloadBinder.pauseDownload();
                 break;
             case R.id.settings:
-                Toast.makeText(this,"You clicked Settings",Toast.LENGTH_SHORT).show();
+                downloadBinder.cancelDownload();
                 break;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -295,6 +321,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //点击事件的
     @Override
     public void onClick(View v) {
+        if (downloadBinder == null){
+            return;
+        }
         switch (v.getId()){
             case R.id.username :case R.id.mail:
                 Intent login_intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -360,5 +389,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //活动销毁解除绑定
+        unbindService(connection);
     }
 }
