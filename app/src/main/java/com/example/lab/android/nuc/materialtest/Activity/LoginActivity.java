@@ -172,9 +172,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (FLAG == 1) {
                     show_password.setImageResource(R.drawable.ic_visibility_off);
                     FLAG = 0;
+                    //显示账户和邮箱
+                    usernameText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    emailText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 } else {
                     show_password.setImageResource(R.drawable.ic_visibility);
                     FLAG = 1;
+                    //隐藏账户和邮箱
+                    usernameText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    emailText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
                 break;
             case R.id.take_picture:
@@ -341,63 +347,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "failed to find imagePath", Toast.LENGTH_SHORT).show();
         }
     }
-    //    private void showPayPwdDialog() {
-//        if (popupWindow == null) {
-//            popupView = View.inflate(LoginActivity.this, R.layout.activity_login, null);
-//            popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT,
-//                    WindowManager.LayoutParams.MATCH_PARENT);
-//            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//                @Override
-//                public void onDismiss() {
-//                    BrightnessManager.lightOn(LoginActivity.this);
-//                    etPayPwd.setText("");
-//                }
-//            });
-//            popupWindow.setBackgroundDrawable(new BitmapDrawable());
-//            popupWindow.setFocusable(true);
-//            popupWindow.setOutsideTouchable(true);
-//
-//            ToggleButton togglePwd = (ToggleButton) popupView.findViewById(R.id.togglePwd);
-//            etPayPwd = (EditText) popupView.findViewById(R.id.etPayPwd);
-//            togglePwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    if (isChecked) {
-//                        //如果选中，显示密码
-//                        etPayPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                    } else {
-//                        //否则隐藏密码
-//                        etPayPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    }
-//                }
-//            });
-//
-//            popupView.findViewById(R.id.tvCancel).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    popupWindow.dismiss();
-//                    BrightnessManager.lightOn(MainActivity.this);
-//                }
-//            });
-//
-//            popupView.findViewById(R.id.tvConfirm).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String payPwd = etPayPwd.getText().toString();
-//                    popupWindow.dismiss();
-//                    BrightnessManager.lightOn(MainActivity.this);
-//                    if (!TextUtils.isEmpty(payPwd)) {
-//                        Toast.makeText(MainActivity.this, "提现请求提交成功！", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//        }
-//
-//        if (popupWindow.isShowing()) {
-//            popupWindow.dismiss();
-//            BrightnessManager.lightOn(MainActivity.this);
-//        }
-//        popupWindow.showAtLocation(MainActivity.this.findViewById(R.id.),
-//                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-//    }
 }

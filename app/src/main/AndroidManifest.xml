@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lab.android.nuc.materialtest">
 
+    <!--读取联系人的权限-->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!-- 基于位置服务的所有权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
