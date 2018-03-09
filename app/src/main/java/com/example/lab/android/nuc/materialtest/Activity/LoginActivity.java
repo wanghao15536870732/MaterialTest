@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //调用摄像头选择头像
     private Button take_picture;
     //调用相册进行选择头像
-    private Button take_form_album;
+    private Button take_album;
 
     private static int FLAG = 1;
 
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //调用摄像头选择头像
         take_picture = (Button) findViewById(R.id.take_picture);
         //调用相册进行选择头像
-        take_form_album = (Button) findViewById(R.id.take_album);
+        take_album = (Button) findViewById(R.id.take_album);
 
         usernameText = (TextView) findViewById(R.id.username);
         emailText = (TextView) findViewById(R.id.mail);
@@ -122,7 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setOnClickListener(this);
         show_password.setOnClickListener(this);
         take_picture.setOnClickListener(this);
-        take_form_album.setOnClickListener(this);
+        take_album.setOnClickListener(this);
+
+//        if ()
 
         //调用SharePreferences的getBoolean()方法获取remember_password这个键值，一开始默认的为false
         boolean isRemember = pref.getBoolean("remember_password",false);
@@ -187,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }catch (IOException e){
                     e.printStackTrace();
                 }
-                //如果ANdroid版本高于7.0
+                //如果Android版本高于7.0
                 if (Build.VERSION.SDK_INT >= 24){
                     //调用FileProvider的getUriForFile()方法将照片解析成Uri对象
                     imageUri = FileProvider.getUriForFile(LoginActivity.this,
@@ -200,16 +202,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent_1 = new Intent("android.media.action.IMAGE_CAPTURE");
                 intent_1.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
                 startActivityForResult(intent_1,TAKE_PHOTO);
-
-            case R.id.take_form_album:
+                break;
+            case R.id.take_album:
+                //申请储存权限
                 if (ContextCompat.checkSelfPermission(LoginActivity.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(LoginActivity.this,new String[]{
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    },1);
+                    },2);
                 }else{
                     openAlbum();
                 }
+                break;
             default:
         }
     }
@@ -217,15 +221,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //通过储存的授权打开相册
     private void openAlbum(){
         //使用Intent调用储存权限
-        Intent intent = new Intent("android.intent.action.GET_CONTEXT");
-        intent.setType("image/*");
-        startActivityForResult(intent,CHOOSE_PHOTO);
+        Intent intent_2 = new Intent("android.intent.action.GET_CONTENT");
+        intent_2.setType("image/*");
+        startActivityForResult(intent_2,CHOOSE_PHOTO);//打开相册
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
-            case 1:
+            case 2:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     openAlbum();
                 }else {
@@ -246,9 +250,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (resultCode == RESULT_OK){
                     try{
                         //将照片显示出来
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().
+                        Bitmap bitmap_1 = BitmapFactory.decodeStream(getContentResolver().
                                 openInputStream(imageUri));
-                        circleImageView.setImageBitmap(bitmap);
+                        circleImageView.setImageBitmap(bitmap_1);
                     }catch (FileNotFoundException e){
                         e.printStackTrace();
                     }
@@ -262,12 +266,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //判断手机版本号
                     if (Build.VERSION.SDK_INT >= 19){
                         //4.4版本以上的使用下面的方法进行处理
-                        handleImageOnkitakat(data);
+                        handleImageOnKitKat(data);
                     }else {
                         //4.4版本以下的使用下面的方法进行处理
                         handleImageBeforeKitkat(data);
                     }
                 }
+                break;
             default:
                 break;
         }
@@ -275,18 +280,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //4.4版本以上,选择相册中的图片不在返回图片真是的Uri了
     @TargetApi(19)
-    private void handleImageOnkitakat(Intent data){
+    private void handleImageOnKitKat(Intent data){
         String imagePath = null;
         Uri uri = data.getData();
         if (DocumentsContract.isDocumentUri(this,uri)){
             //如果是Document类型的Uri,则通过document id 进行处理
             String docId = DocumentsContract.getDocumentId(uri);
-            if ("com.android.provider.media.documents".equals(uri.getAuthority())){
+            if ("com.android.providers.media.documents".equals(uri.getAuthority())){
                 String id = docId.split(":")[1];//解析出数字格式的id
                 String selection = MediaStore.Images.Media._ID + "=" + id;
                 imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);
-            }else if ("com.android.provider.downloads.documents".equals(uri.getAuthority())){
-                Uri contentUri = ContentUris.withAppendedId(Uri.parse("contnet://downloads/public_downloads"),Long.valueOf(docId));
+            }else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())){
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),Long.valueOf(docId));
                 imagePath = getImagePath(contentUri,null);
             }
         }else if ("content".equalsIgnoreCase(uri.getScheme())){
@@ -322,6 +327,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //关闭查找
             cursor.close();
         }
+        //返回路径
         return path;
     }
 
@@ -329,8 +335,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void displayImage(String Imagepath){
         if (Imagepath != null){
             //利用BitmapFactory的decodeFile()方法解析图片
-            Bitmap bitmap = BitmapFactory.decodeFile(Imagepath);
-            circleImageView.setImageBitmap(bitmap);
+            Bitmap bitmap_2 = BitmapFactory.decodeFile(Imagepath);
+            circleImageView.setImageBitmap(bitmap_2);
         }else{
             Toast.makeText(this, "failed to find imagePath", Toast.LENGTH_SHORT).show();
         }
