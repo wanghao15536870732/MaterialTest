@@ -4,46 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:padding="10dp"
-    android:background="?attr/colorPrimary">
+    android:background="@drawable/contacts_itembackgaound">
 
     <!--该开源项目是用来轻松实现图片圆形化的共能-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/img_x"
-        android:layout_centerInParent="true"/>
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignStart="@+id/username"
+        android:layout_alignTop="@+id/ic_edit"
+        android:src="@drawable/img_x" />
+
     <ImageView
         android:id="@+id/ic_edit"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_toRightOf="@+id/icon_image"
+        android:layout_height="65dp"
+        android:layout_alignBottom="@+id/change_headPhoto"
+        android:layout_alignTop="@+id/change_headPhoto"
+        android:layout_toLeftOf="@+id/change_headPhoto"
+        android:layout_toStartOf="@+id/change_headPhoto"
         android:src="@drawable/ic_edit_black_24dp" />
+
     <Button
         android:id="@+id/change_headPhoto"
         android:layout_width="95dp"
         android:layout_height="45dp"
-        android:layout_toRightOf="@+id/ic_edit"
+        android:layout_above="@+id/mail"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/shape"
         android:text="点击切换头像"
-        android:textSize="10sp"/>
+        android:textSize="10sp" />
+
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/mail"
         android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/mail"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
         android:text="wanghao"
-        android:textColor="#FFF"
-        android:textSize="14sp"/>
+        android:textColor="#000000"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/username"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_toLeftOf="@+id/ic_edit"
+        android:layout_toStartOf="@+id/ic_edit"
         android:text="1484290617@qq.com"
-        android:textColor="#FFF"
+        android:textColor="#000000"
         android:textSize="14sp" />
 
 </RelativeLayout>

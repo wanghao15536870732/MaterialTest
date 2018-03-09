@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/main_fruit"
             android:icon="@drawable/ic_bookmark"
-            android:title="Fruit"/>
+
+            android:title="Fruit" />
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_login"
@@ -26,6 +26,7 @@
         <item
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_task"
-            android:title="Task"/>
+            android:title="Task"
+            />
     </group>
 </menu>
