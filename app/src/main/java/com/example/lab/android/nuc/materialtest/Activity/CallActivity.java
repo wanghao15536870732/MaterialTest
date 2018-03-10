@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -41,16 +42,22 @@ public class CallActivity extends AppCompatActivity implements View.OnClickListe
     private Button callButton;
 
 
+
+    private FloatingActionButton fb;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
+
         backButton_2 = (Button) findViewById(R.id.title_back_2);
         callButton = (Button) findViewById(R.id.title_call);
 
+        fb = (FloatingActionButton) findViewById(R.id.fab_add);
         backButton_2.setOnClickListener(this);
         callButton.setOnClickListener(this);
+
         //建立ListView的实例
         ListView listView = (ListView) findViewById(R.id.contacts_view);
         adapter = new ContactsAdapter(CallActivity.this,
@@ -132,6 +139,16 @@ public class CallActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.title_call:
                 Intent call_intent = new Intent(Intent.ACTION_DIAL);
                 startActivity(call_intent);
+                break;
+            case R.id.fab_add:
+                Intent add_intent = new Intent(CallActivity.this,Add_Contacts_Activity.class);
+                startActivityForResult(add_intent,1);
+                break;
+            default:
         }
     }
+
+    //获取所有动态的添加的Item，找到控件的id，获取数据
+
+
 }

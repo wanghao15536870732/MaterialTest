@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lab.android.nuc.materialtest">
 
+    <!-- 读取短信的权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
     <!-- 读取联系人的权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 基于位置服务的所有权限 -->
@@ -59,7 +63,9 @@
         <service
             android:name=".Service.DownloadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".Activity.Add_Contacts_Activity"></activity>
     </application>
 
 </manifest>

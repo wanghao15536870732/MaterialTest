@@ -5,15 +5,16 @@
     android:layout_height="match_parent"
     android:background="#e70b6a">
 
-    <Button
-        android:id="@+id/diaplay_apk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="安   装"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:background="@drawable/contacts_itembackgaound"/>
+    <!--<Button-->
+        <!--android:id="@+id/diaplay_apk"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="安   装"-->
+        <!--android:textSize="25sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:background="@drawable/contacts_itembackgaound"/>-->
     <com.example.lab.android.nuc.materialtest.Call.SlideCutListView
+        android:id="@+id/slideCutListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@android:color/transparent"

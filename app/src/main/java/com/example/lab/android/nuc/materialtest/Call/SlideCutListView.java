@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Scroller;
 
+import com.example.lab.android.nuc.materialtest.Activity.FriendActivity;
+
 /**
  * Created by 王浩 on 2018/3/10.
  */
@@ -62,6 +64,7 @@ public class SlideCutListView extends ListView {
      * 用来指示item滑出屏幕的方向,向左或者向右,用一个枚举值来标记
      */
     private RemoveDirection removeDirection;
+
 
     // 滑动删除方向的枚举值
     public enum RemoveDirection {
