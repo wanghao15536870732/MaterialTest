@@ -44,9 +44,12 @@ public class DownloadTask extends AsyncTask<String,Integer,Integer> {
             long downloadLength = 0;//记录已下载的文件长度
             String downloadUrl = params[0];
             String fileNmae = downloadUrl.substring(downloadUrl.lastIndexOf("/"));
+            AutoInstall.setdownloadUrl(downloadUrl);
             //包的名是固定的
+
             String directory = Environment.getExternalStoragePublicDirectory
                     (Environment.DIRECTORY_DOWNLOADS).getPath();
+
             //文件的路径即为:包的名 + "/" + 文件的名字
             file = new File(directory + fileNmae);
             if (file.exists()){

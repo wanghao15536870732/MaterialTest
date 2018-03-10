@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -45,6 +46,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lab.android.nuc.materialtest.Downalod.AutoInstall;
 import com.example.lab.android.nuc.materialtest.FloatActionButton.DragFloatActionButton;
 import com.example.lab.android.nuc.materialtest.Fruit.Fruit;
 import com.example.lab.android.nuc.materialtest.Fruit.FruitAdapter;
@@ -127,22 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //打开应用显示通知栏
         notification();
-        Button change_view = (Button) findViewById(R.id.change_headPhoto);
-        //点击切换头像按钮调用相册选图片进行显示
-//        change_view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (ContextCompat.checkSelfPermission(MainActivity.this,
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-//                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                    },1);
-//                }
-//                else{
-//                    openAlbum();
-//                }
-//            }
-//        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
