@@ -65,7 +65,10 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activity.Add_Contacts_Activity"></activity>
+        <activity android:name=".Activity.Add_Contacts_Activity" />
+        <activity
+            android:name=".Activity.Main2Activity"
+            android:label="@string/title_activity_main2"></activity>
     </application>
 
 </manifest>

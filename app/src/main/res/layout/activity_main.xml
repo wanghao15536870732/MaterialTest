@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_done"
+            app:srcCompat="@drawable/ic_done"
             android:elevation="8dp"/>
         <com.example.lab.android.nuc.materialtest.FloatActionButton.DragFloatActionButton
             android:id="@+id/fab_move"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:layout_margin="16sp"
-            android:src="@drawable/ic_add"/>
+            app:srcCompat="@drawable/ic_add"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"

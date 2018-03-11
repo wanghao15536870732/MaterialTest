@@ -43,7 +43,6 @@ public class CallActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private FloatingActionButton fb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class CallActivity extends AppCompatActivity implements View.OnClickListe
         backButton_2 = (Button) findViewById(R.id.title_back_2);
         callButton = (Button) findViewById(R.id.title_call);
 
-        fb = (FloatingActionButton) findViewById(R.id.fab_add);
         backButton_2.setOnClickListener(this);
         callButton.setOnClickListener(this);
 
@@ -139,10 +137,6 @@ public class CallActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.title_call:
                 Intent call_intent = new Intent(Intent.ACTION_DIAL);
                 startActivity(call_intent);
-                break;
-            case R.id.fab_add:
-                Intent add_intent = new Intent(CallActivity.this,Add_Contacts_Activity.class);
-                startActivityForResult(add_intent,1);
                 break;
             default:
         }

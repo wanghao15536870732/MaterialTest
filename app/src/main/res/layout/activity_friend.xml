@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#e70b6a">
-
-    <!--<Button-->
-        <!--android:id="@+id/diaplay_apk"-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#e70b6a">-->
+    <!---->
+    <!--<com.example.lab.android.nuc.materialtest.Call.SlideCutListView-->
+        <!--android:id="@+id/slideCutListView"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="安   装"-->
-        <!--android:textSize="25sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:background="@drawable/contacts_itembackgaound"/>-->
-    <com.example.lab.android.nuc.materialtest.Call.SlideCutListView
-        android:id="@+id/slideCutListView"
+        <!--android:layout_height="match_parent"-->
+        <!--android:listSelector="@android:color/transparent"-->
+        <!--android:divider="#53d03a"-->
+        <!--android:cacheColorHint="@android:color/transparent">-->
+    <!--</com.example.lab.android.nuc.materialtest.Call.SlideCutListView>-->
+    <!---->
+    <!---->
+<!--</LinearLayout>-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:listSelector="@android:color/transparent"
-        android:divider="#53d03a"
-        android:cacheColorHint="@android:color/transparent">
-    </com.example.lab.android.nuc.materialtest.Call.SlideCutListView>
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_addView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+            <Button
+                android:id="@+id/btn_getData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_addView"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape"
+                android:text="获取数据"/>
+    </RelativeLayout>
+
+</ScrollView>

@@ -179,6 +179,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent login_intent = new Intent(MainActivity.this,LoginActivity.class);
                         startActivityForResult(login_intent,1);
                         break;
+                    case R.id.other:
+                        Intent other_intent = new Intent(MainActivity.this,Main2Activity.class);
+                        startActivityForResult(other_intent,1);
+                        break;
                     default:
                 }
                 return true;

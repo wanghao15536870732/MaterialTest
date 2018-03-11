@@ -28,5 +28,9 @@
             android:icon="@drawable/ic_task"
             android:title="Task"
             />
+        <item
+            android:id="@+id/other"
+            android:icon="@drawable/apple_pic"
+            android:title="Other"/>
     </group>
 </menu>
