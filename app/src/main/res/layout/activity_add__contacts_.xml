@@ -79,7 +79,8 @@
                 android:layout_toRightOf="@+id/tv_hotelServer"
                 android:numStars="5"
                 android:rating="0"
-                android:stepSize="1.0" />
+                android:stepSize="1.0"
+                android:progressTint="#517ae2"/>
         </RelativeLayout>
 
         <EditText

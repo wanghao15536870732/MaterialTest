@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by 王浩 on 2018/3/11.
- */
+
 
 public class CrimeLab extends Crime {
 
@@ -16,13 +14,13 @@ public class CrimeLab extends Crime {
 
     private List<CrimeLab> mCrimes;
 
-    public static CrimeLab get(Context context){
-        if (sCrimeLab == null){
-            sCrimeLab = new CrimeLab();
-        }
-        return sCrimeLab;
-    }
-    private CrimeLab(Context context{
+//    public static CrimeLab get(Context context){
+//        if (sCrimeLab == null){
+//            sCrimeLab = new CrimeLab();
+//        }
+//        return sCrimeLab;
+//    }
+    private CrimeLab(Context context){
         mCrimes = new ArrayList<>();
     }
 

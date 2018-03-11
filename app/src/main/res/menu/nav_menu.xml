@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group android:id="@+id/one" android:checkableBehavior="single">
 
         <item
             android:id="@+id/main_fruit"
             android:icon="@drawable/ic_bookmark"
-
             android:title="Fruit" />
+    </group>
+    <group android:id="@+id/two" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_login"
             android:title="Login"/>
+    </group>
+    <group android:id="@+id/three" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_call"
             android:icon="@drawable/ic_call"
             android:title="Call"/>
+    </group>
+    <group android:id="@+id/four" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_friends"
             android:icon="@drawable/ic_friends"
             android:title="Friends"/>
+    </group>
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_location"
             android:icon="@drawable/ic_location"
             android:title="Location"/>
+    </group>
+    <group android:id="@+id/six" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_task"
             android:icon="@drawable/ic_task"
-            android:title="Task"
-            />
+            android:title="Task" />
+    </group>
+    <group android:id="@+id/five" android:checkableBehavior="single">
         <item
             android:id="@+id/other"
             android:icon="@drawable/apple_pic"
