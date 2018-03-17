@@ -7,14 +7,19 @@
         android:icon="@drawable/ic_backup"
         android:title="Backup"
         app:showAsAction="always"/>
+    <!--always表示永远显示在Toolbar中-->
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_delete"
         android:title="Delete"
         app:showAsAction="ifRoom"/>
+    <!--ifRoom表示屏幕空间充足的话,就显示在ToolBar中,
+    如果不足的话就显示在菜单当中-->
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_more_vert"
         android:title="Settings"
         app:showAsAction="never" />
+    <!--never表示永远显示在菜单当中-->
+    <!--ToolBar当中会显示图标，而在菜单当中只会显示文字-->
 </menu>

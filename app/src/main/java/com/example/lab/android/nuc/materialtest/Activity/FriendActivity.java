@@ -39,9 +39,11 @@ public class FriendActivity extends AppCompatActivity implements View.OnClickLis
     private SlideCutListView slideCutListView;
     
     private ArrayAdapter<String> adapter;
-    
+
+    //String 的泛型用于添加联系人的数据
     private List<String> dataSourceList = new ArrayList<String>();
 
+    //Contacts对象的泛型,用于记录position,
     private List<Contacts> dataSourceList_1 = new ArrayList<Contacts>();
     private Button change_view;
 

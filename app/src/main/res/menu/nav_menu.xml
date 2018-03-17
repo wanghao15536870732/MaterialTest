@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <!--用Group将item分开，相邻item之间可以显示分割线-->
     <group android:id="@+id/one" android:checkableBehavior="single">
 
         <item

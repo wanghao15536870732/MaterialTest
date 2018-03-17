@@ -1,6 +1,8 @@
 package com.example.lab.android.nuc.materialtest.Activity;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -17,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -28,6 +31,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -50,7 +54,7 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class    LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     //调用摄像头选择头像
     private static final int TAKE_PHOTO = 1;
@@ -124,8 +128,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         take_picture.setOnClickListener(this);
         take_album.setOnClickListener(this);
 
-//        if ()
 
+        //密码和账号的记住功能
         //调用SharePreferences的getBoolean()方法获取remember_password这个键值，一开始默认的为false
         boolean isRemember = pref.getBoolean("remember_password",false);
         if (isRemember){
@@ -140,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -166,7 +171,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("username_return",username);
                 intent.putExtra("email_return",email);
                 setResult(RESULT_OK,intent);
-                finish();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            Thread.sleep(1000);
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            //切换回主线程
+                            public void run() {
+                                //点击LoginButton,让Button消失
+                                int cx = loginButton.getWidth() / 2;
+                                int cy = loginButton.getHeight() / 2;
+                                float radius = loginButton.getWidth();
+                                Animator anim = ViewAnimationUtils.createCircularReveal(loginButton,cx,cy,radius,0);
+                                anim.addListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        super.onAnimationEnd(animation);
+
+                                        loginButton.setVisibility(View.INVISIBLE);
+                                    }
+                                });
+                                anim.start();
+                            }
+                        });
+                    }
+                });
+
                 break;
             case R.id.mail_Visibility:
                 if (FLAG == 1) {
@@ -197,7 +233,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 //如果Android版本高于7.0
                 if (Build.VERSION.SDK_INT >= 24){
+
                     //调用FileProvider的getUriForFile()方法将照片解析成Uri对象
+
                     imageUri = FileProvider.getUriForFile(LoginActivity.this,
                             "com.example.lab.android.nuc.materialtest",outputImage);
                 }else {
@@ -205,12 +243,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
 
                 //启动相机程序
+
                 Intent intent_1 = new Intent("android.media.action.IMAGE_CAPTURE");
                 intent_1.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
                 startActivityForResult(intent_1,TAKE_PHOTO);
                 break;
             case R.id.take_album:
                 //申请储存权限
+
                 if (ContextCompat.checkSelfPermission(LoginActivity.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(LoginActivity.this,new String[]{

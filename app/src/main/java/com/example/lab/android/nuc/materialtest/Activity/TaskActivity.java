@@ -102,10 +102,12 @@ public class TaskActivity extends AppCompatActivity {
 
                     msgList.add(msg_2);
 
+                    //当有新消息时，通知列表有新消息产生,并刷新列表中的数据
                     adapter.notifyItemInserted(msgList.size() - 1);
 
+                    //将ListView定位到最后一行
                     msgrecyclerView.scrollToPosition(msgList.size() - 1);
-
+                    //发完消息后，清空输入栏
                     outputText.setText("");
                 }
             }

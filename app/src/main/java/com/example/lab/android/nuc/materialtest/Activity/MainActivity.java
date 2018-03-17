@@ -65,6 +65,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    //记录下到底点击的那个按钮
+    public int flag;
 
     //下载的服务
     private DownloadService.DownloadBinder downloadBinder;
@@ -80,7 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onServiceDisconnected(ComponentName name) {
 
         }
+
     };
+
+    //滑动菜单的实例
     private DrawerLayout mDrawerLayout;
 
     private static int VIBRAT = 1;
@@ -103,8 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Fruit("Pineapple",R.drawable.pineapple_pic),new Fruit("Strawberry",R.drawable.strawberry_pic),
             new Fruit("Cherry",R.drawable.cherry_pic),new Fruit("Mango",R.drawable.mango_pic)};
 
+    //水果列表
     private List<Fruit> fruitList = new ArrayList<>();
 
+    //水果View的适配器
     private FruitAdapter fruitAdapter;
 
 
@@ -116,26 +123,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //采用自定义的ToolBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //获取圆形View的实例
         headImageView = (CircleImageView) findViewById(R.id.icon_image);
 
+        ///获取名字跟邮箱的实例
         usernameView = (TextView) findViewById(R.id.username);
         emailView = (TextView) findViewById(R.id.mail);
 
-        //开启服务
+        //开启酷狗音乐的下载服务
         Intent intent_4 = new Intent(this,DownloadService.class);
         startService(intent_4);
         bindService(intent_4,connection,BIND_AUTO_CREATE);
 
+
         //打开应用显示通知栏
         notification();
 
+        //获取菜单的的实例
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         final NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
 
+        //调用getSupportActionBar()方法让导航按钮显示出来
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null){
 
             //调用actionBar的setDisplayHomeAsUpEnabled()方法让导航按钮显示出开
@@ -152,6 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                //如果已经拉到左边，则关闭
                 if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)){
                     mDrawerLayout.closeDrawers();
                 }
@@ -238,15 +256,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        //随机重复n次FruitName
         initFruits();
+
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //网格式布局，产生2列数据
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        //让recyclerView的布局采用网格式布局
         recyclerView.setLayoutManager(layoutManager);
         fruitAdapter = new FruitAdapter(fruitList);
         recyclerView.setAdapter(fruitAdapter);
 
-
+        //通过findViewById找到swipeRefreshLayout的实例
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        //设置下拉刷新进度条的颜色为绿色
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -273,11 +296,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //更新水果的布局
     private void refreshFruit(){
+        //开启一个新的线程
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
-//                    线程沉睡2 秒，否则刷新就立即结束了，从而看不到刷新过程
+                 //   线程沉睡2 秒，否则刷新就立即结束了，从而看不到刷新过程
                     Thread.sleep(2000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
@@ -350,12 +374,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //该应用的通知显示栏
     private void notification(){
+
         //对系统通知进行管理
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         //点击通知的动作
         Intent intent = new Intent(this,MainActivity.class);
-        //延迟的Intent
+
+        //延迟的Intent，PendingIntent
         PendingIntent pi = PendingIntent.getActivity(this,0,intent,0);
 
         Notification notification = new NotificationCompat.Builder(this)

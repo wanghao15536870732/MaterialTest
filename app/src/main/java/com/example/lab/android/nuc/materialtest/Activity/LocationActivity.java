@@ -108,6 +108,8 @@ public class LocationActivity extends AppCompatActivity {
         mLocationClient.setLocOption(option);
     }
 
+
+    //设置让mapView随着Activity的生命周期开启跟关闭
     @Override
     protected void onResume() {
         super.onResume();

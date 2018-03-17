@@ -1,3 +1,6 @@
+
+<!--滑动菜单DrawLayout-->
+
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -5,10 +8,15 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent" >
 
+    <!--CoordinatorLayout、、、加强版的FrameLayout-->
+    <!--跟FrameLayout不同的是它可以监控所有子布局的各种事件-->
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--为防止RecyclerView将TolBar遮住-->
+        <!--可以将TolBar嵌套到AppBarLayout当中-->
+        <!--并给RecyclerView指定一个布局行为-->
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -22,6 +30,11 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_scrollFlags="scroll|enterAlways|snap"/>
+            <!--AppBarLayout还可以实现-->
+            <!--scroll ：当RecyclerView向上滚动的时候，ToolBar会跟着一起向上滚动并实现隐藏
+            enterAlways ：当RecyclerView向下滚动的时候，Toolbar会跟着一起向下滚动并重新显示
+            snap ：当ToolBar还没有隐藏或者显示的时候，会根据当前滚动的距离，
+            自动选择时显示还是隐藏-->
         </android.support.design.widget.AppBarLayout>
 
 
@@ -41,6 +54,9 @@
             android:layout_margin="16sp"
             app:srcCompat="@drawable/ic_add"/>
 
+        <!--添加SwipeRefreshLayout,进行下拉刷新的功能-->
+        <!--RecyclerView的布局添加到SwipeRefreshLayout,因此，
+        Recycler布局行为要移到SwipeRefreshLayout里面才行-->
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"

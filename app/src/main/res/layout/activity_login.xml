@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
 
@@ -15,7 +16,7 @@ android:layout_height="match_parent">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@drawable/shape_1">
+    android:background="@drawable/shape">
     <!--该开源项目是用来轻松实现图片圆形化的共能-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
@@ -35,7 +36,7 @@ android:layout_height="match_parent">
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/take_picture"
         android:layout_toStartOf="@+id/take_picture"
-        android:src="@drawable/ic_stay_primary_portrait_black_24dp" />
+        app:srcCompat="@drawable/ic_stay_primary_portrait_black_24dp" />
 
     <Button
         android:id="@+id/take_picture"
@@ -57,7 +58,7 @@ android:layout_height="match_parent">
         android:layout_marginTop="12dp"
         android:layout_toLeftOf="@+id/take_picture"
         android:layout_toStartOf="@+id/take_picture"
-        android:src="@drawable/ic_picture"/>
+        app:srcCompat="@drawable/ic_picture"/>
 
     <Button
         android:id="@+id/take_album"
@@ -73,14 +74,14 @@ android:layout_height="match_parent">
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="#fff">
+    android:layout_height="40dp">
 </LinearLayout>
 
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="60dp"
+    android:background="@drawable/shape_2">
 
     <TextView
         android:layout_width="90dp"
@@ -100,7 +101,8 @@ android:layout_height="match_parent">
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="60dp"
+    android:background="@drawable/shape">
 
     <TextView
         android:layout_width="90dp"
@@ -119,7 +121,7 @@ android:layout_height="match_parent">
         android:id="@+id/mail_Visibility"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_visibility" />
+        app:srcCompat="@drawable/ic_visibility" />
 </LinearLayout>
 <LinearLayout
     android:orientation="horizontal"

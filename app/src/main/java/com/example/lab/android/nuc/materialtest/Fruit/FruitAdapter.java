@@ -58,6 +58,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
                 int position = holder.getAdapterPosition();
                 Fruit fruit = mFruitList.get(position);
                 Intent intent = new Intent(mContext,FruitActivity.class);
+                //将点击到的水果数据传送到每个水果点击开的Activity
                 intent.putExtra(FruitActivity.FRUIT_NAME,fruit.getName());
                 intent.putExtra(FruitActivity.FRUIT_IMAGE_ID,fruit.getImageId());
                 mContext.startActivity(intent);
@@ -71,6 +72,8 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 
         Fruit fruit = mFruitList.get(position);
         holder.fruitName.setText(fruit.getName());
+
+        //使用Glide来加载图片
         Glide.with(mContext).load(fruit.getImageId()).into(holder.fruitView);
     }
     @Override
