@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FruitAdapter fruitAdapter;
 
 
+    private ClipData.Item download;
     //下拉刷新列表
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -139,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent_4 = new Intent(this,DownloadService.class);
         startService(intent_4);
         bindService(intent_4,connection,BIND_AUTO_CREATE);
-
 
         //打开应用显示通知栏
         notification();
@@ -345,12 +346,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.backup:
                 String url = "http://shouji.360tpcdn.com/180205/be9c722e58ec42eb85ceef6325ee8619/com.kugou.android_8948.apk";
                 downloadBinder.startDownload(url);
+
                 break;
             case R.id.delete:
                 downloadBinder.pauseDownload();
                 break;
             case R.id.settings:
                 downloadBinder.cancelDownload();
+                break;
+            case R.id.realSettings:
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
                 break;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);

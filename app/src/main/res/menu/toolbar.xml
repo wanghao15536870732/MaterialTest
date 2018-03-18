@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/backup"
-        android:icon="@drawable/ic_backup"
+        android:icon="@drawable/ic_download"
         android:title="Backup"
         app:showAsAction="always"/>
     <!--always表示永远显示在Toolbar中-->
@@ -18,8 +18,12 @@
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_more_vert"
-        android:title="Settings"
+        android:title="Canceled"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/realSettings"
+        android:title="Settings"
+        app:showAsAction="never"/>
     <!--never表示永远显示在菜单当中-->
     <!--ToolBar当中会显示图标，而在菜单当中只会显示文字-->
 </menu>

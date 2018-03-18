@@ -69,6 +69,9 @@
         <activity
             android:name=".Activity.Main2Activity"
             android:label="@string/title_activity_main2" />
+        <activity
+            android:name=".Activity.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

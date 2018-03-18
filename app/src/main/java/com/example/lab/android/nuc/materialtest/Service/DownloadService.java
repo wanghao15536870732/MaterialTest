@@ -30,11 +30,12 @@ public class DownloadService extends Service {
 
     private String downloadUrl;
 
+    //覆写接口的四个方法
     private DownloadListener listener = new DownloadListener() {
         @Override
         //显示进度条
         public void onProgress(int progress) {
-            getNotificationmanager().notify(1,getNotification("Downloading...",
+            getNotificationManager().notify(1,getNotification("Downloading...",
                     progress));
         }
 
@@ -43,7 +44,7 @@ public class DownloadService extends Service {
             downloadTask = null;
             //当下载成的时候将前台的服务关闭，并创建一个下载成功的通知
             stopForeground(true);
-            getNotificationmanager().notify(1,getNotification("Download Success",-1));
+            getNotificationManager().notify(1,getNotification("Download Success",-1));
             Toast.makeText(DownloadService.this, "Download Success", Toast.LENGTH_SHORT).show();
         }
 
@@ -52,7 +53,7 @@ public class DownloadService extends Service {
             downloadTask = null;
             //下载失败的时候，将前台服务通知关闭，并创建一个下载失败的通知
             stopForeground(true);
-            getNotificationmanager().notify(1,getNotification("Download Failed",-1));
+            getNotificationManager().notify(1,getNotification("Download Failed",-1));
             Toast.makeText(DownloadService.this, "Download Failed", Toast.LENGTH_SHORT).show();
         }
 
@@ -111,7 +112,7 @@ public class DownloadService extends Service {
                         file.delete();
                     }
                     //取消通知
-                    getNotificationmanager().cancel(1);
+                    getNotificationManager().cancel(1);
                     //关闭前端通知
                     stopForeground(true);
                     Toast.makeText(DownloadService.this, "Canceled", Toast.LENGTH_SHORT).show();
@@ -120,7 +121,7 @@ public class DownloadService extends Service {
         }
     }
 
-    private NotificationManager getNotificationmanager(){
+    private NotificationManager getNotificationManager(){
         return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
