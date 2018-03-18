@@ -39,7 +39,7 @@
             CollapsingToolbarLayout折叠过程中的折叠模式-->
 
             <!--pin表示折叠过程中位置始终保持不变-->
-            <!--parallax表示在折叠的时候会产生错位拍内衣,这样的效果更好-->
+            <!--parallax表示在折叠的时候会产生错位,这样的效果更好-->
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

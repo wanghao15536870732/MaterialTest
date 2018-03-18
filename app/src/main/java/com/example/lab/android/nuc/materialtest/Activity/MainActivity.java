@@ -268,6 +268,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fruitAdapter = new FruitAdapter(fruitList);
         recyclerView.setAdapter(fruitAdapter);
 
+        //下拉刷新
+
         //通过findViewById找到swipeRefreshLayout的实例
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         //设置下拉刷新进度条的颜色为绿色
